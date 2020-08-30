@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 文章POJO
+ * 文章POJO类
  */
 @Data
 public class Article implements Serializable {
