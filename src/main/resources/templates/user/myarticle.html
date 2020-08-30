@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <title>主页</title>
+    <style>
+        * { margin: 0;padding: 0; }
+        .img {
+            height: 250px;
+            width: 280px;
+        }
+        .us {
+            border: 1px solid #000000;
+        }
+        .img {
+            width: 100%;
+            height: 150px;
+        }
+        .hn {
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript"  th:inline="javascript">
+        // function myFunction(){
+        //     var msg =  $("#msg_success").val();
+        //     alert(msg);
+        // }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="/tohome?page=1">个人博客</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/tohome">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline mt-2 mt-md-0" action="/article/search" method="post">
+                        <input class="form-control mr-sm-2" type="text" name="search" id="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+
+        <div class="col-md-12" style="height: 100px;"></div>
+        <div class="col-md-7">
+
+            <div class="card" th:each="al:${list}">
+                <div class="card-header">
+                    Article
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><span th:text="${al.atitle}"></span></h5>
+                    <p class="card-text"><span th:text="${al.atext}"></span></p>
+                    <a href="" class="btn btn-primary">查看</a>
+                </div>
+                <div class="" style="height: 50px;"></div>
+            </div>
+
+            <div class="" style="height: 10px;"></div>
+<!--            <div class="p">-->
+<!--                <nav aria-label="Page navigation example">-->
+<!--                    <ul class="pagination">-->
+<!--                        <li class="page-item" th:unless="${pageInfo_all.isFirstPage}">-->
+<!--                            <a class="page-link" th:href="@{'/tohome?page='+${pageInfo_all.prePage}}" aria-label="Previous">-->
+<!--                                <span aria-hidden="true">&laquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_all.pages)}" th:if="${x} lt '5'">-->
+<!--                            <a class="page-link" th:href="@{'/tohome?page='+${x}}">-->
+<!--                                <span th:text="${x}"></span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item" th:unless="${pageInfo_all.isLastPage}">-->
+<!--                            <a class="page-link" th:href="@{'/tohome?page='+${pageInfo_all.nextPage}}" aria-label="Next">-->
+<!--                                <span aria-hidden="true">&raquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </div>-->
+        </div>
+
+        <div class="col-md-4 us">
+            <div class="row u" th:if="${session.users} == null">
+                <div class="col-md-12" style="height: 20px;"></div>
+                <div class="col-md-12 img">
+                    <img src="../image/brand/bootstrap-solid.svg" class="img">
+                </div>
+                <div class="col-md-12" style="height: 20px;"></div>
+                <div class="col-md-12 b">
+                    <a href="/user/tologin"><button class="btn btn-info" style="width: 49%">登录</button></a>
+                    <a href="/user/toRegist"><button class="btn btn-warning" style="width: 49%">注册</button></a>
+                </div>
+            </div>
+            <div class="row u" th:if="${session.users} != null">
+                <div class="col-md-12" style="height: 15px;"></div>
+                <div class="col-md-12">
+                    <div class="btn-group dropleft">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">后台管理</a>
+                            <a class="dropdown-item" href="#">我的文章</a>
+                            <a class="dropdown-item" href="#">待定</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">待定k</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="height: 15px;"></div>
+                <div class="col-md-12 img">
+                    <img src="../image/brand/bootstrap-solid.svg" class="img">
+                </div>
+                <div class="col-md-12" style="height: 20px;"></div>
+                <div class="col-md-12 b">
+                    <h5 class="hn">你好！ <b th:text="${session.users.username}"></b></h5>
+                </div>
+                <div class="col-md-12">
+                    <a href="/article/toadd" class="btn btn-success" style="width: 49%">添加文章</a>
+                    <a href="/user/logout" class="btn btn-danger" style="width: 49%">登&nbsp;&nbsp;出</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

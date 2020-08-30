@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/signin.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <title>用户登录</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px gray solid;
+        }
+        .item {
+            width: 300px;
+            margin: 20px 80px;
+        }
+        .items {
+            width: 300px;
+            margin: 30px 130px;
+        }
+    </style>
+</head>
+<!--<body>-->
+<!--    <div class="container">-->
+<!--        <h2>用户登录</h2>-->
+<!--        <hr>-->
+<!--        <div>-->
+<!--            <form action="login?page=1" method="post">-->
+<!--                <div class="item">-->
+<!--                    <label for="username">用户名：</label>-->
+<!--                    <input type="text" id="username" name="username">-->
+<!--                </div>-->
+<!--                <div class="item">-->
+<!--                    <label for="password">密&nbsp;&nbsp;&nbsp;码：</label>-->
+<!--                    <input type="password" id="password" name="password">-->
+<!--                </div>-->
+<!--                <div class="items">-->
+<!--                    <input type="submit" value="登录">-->
+<!--                    &nbsp;-->
+<!--                    <a href="toRegist">注册</a>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <span th:text="${msg_error}"></span>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</body>-->
+<body class="text-center">
+    <form class="form-signin" action="/user/login" method="post">
+        <img class="mb-4" src="../image/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">登&nbsp;&nbsp;录</h1>
+        <label for="username" class="sr-only">用户名</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
+        <label for="password" class="sr-only">密&nbsp;码</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
+        <div class="checkbox mb-3">
+            <label>
+                <span></span>
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+    </form>
+</body>
+</html>

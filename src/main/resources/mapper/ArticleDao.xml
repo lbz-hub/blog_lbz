@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blog.blog_lbz.dao.ArticleDao">
+    <resultMap id="userMapper" type="com.blog.blog_lbz.entity.Article.Article">
+        <id property="aid" column="aid"/>
+        <result property="atitle" column="atitle"/>
+        <result property="atext" column="atext"/>
+        <result property="atime" column="atime"/>
+        <result property="status" column="status"/>
+
+        <association property="user" column="uid" javaType="com.blog.blog_lbz.entity.User.User">
+            <id property="uid" column="uid"/>
+            <result property="username" column="username"/>
+            <result property="password" column="password"/>
+            <result property="email" column="email"/>
+            <result property="status" column="status"/>
+        </association>
+    </resultMap>
+    <insert id="add" parameterType="article">
+        insert into article(atitle, atext, atime, uid) values (#{atitle}, #{atext}, #{atime}, #{uid})
+    </insert>
+    <select id="all" resultType="article">
+        select * from article
+    </select>
+    <select id="search" parameterType="String" resultType="article">
+        select * from article
+        <where>
+            <if test="search != null and search !=">
+                atitle like "%"#{search}"%"
+            </if>
+        </where>
+    </select>
+</mapper>

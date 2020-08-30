@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <title>用户注册</title>
+    <style>
+        .container {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px gray solid;
+        }
+        .item {
+            width: 300px;
+            margin: 20px 80px;
+        }
+        .items {
+            width: 300px;
+            margin: 30px 130px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>用户登录</h2>
+        <hr>
+        <div>
+            <form action="regist" method="post">
+                <div class="item">
+                    <label for="username">用户名：</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="item">
+                    <label for="password">密&nbsp;&nbsp;&nbsp;码：</label>
+                    <input type="password" id="password" name="password">
+                </div>
+                <div class="item">
+                    <label for="email">邮&nbsp;&nbsp;&nbsp;箱：</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="items">
+                    <input type="submit" value="注册">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
