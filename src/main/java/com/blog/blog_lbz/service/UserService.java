@@ -12,4 +12,5 @@ public interface UserService {
     User login(User user);
     void save(User user);
     List<Article> findByUid(Integer uid);
+    void changeImg(User user);
 }

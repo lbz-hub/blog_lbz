@@ -34,4 +34,9 @@ public class UserServiceImpl implements UserService {
     public List<Article> findByUid(Integer uid) {
         return userDao.findByUid(uid);
     }
+
+    @Override
+    public void changeImg(User user) {
+        userDao.changeImg(user);
+    }
 }

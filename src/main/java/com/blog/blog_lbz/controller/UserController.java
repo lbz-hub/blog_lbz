@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @RequestMapping("/tohome")
-    public String tohome(Integer page, Model model) {
-        PageInfo<Article> pageInfo = articleService.all(page, 3);
+    public String tohome(Model model) {
+        PageInfo<Article> pageInfo = articleService.all(1, 3);
         model.addAttribute("pageInfo_all", pageInfo);
         return "user/home";
     }
@@ -142,9 +142,9 @@ public class UserController {
         return "user/changeimg";
     }
 
-    @RequestMapping("/user/changeimg")
-    public String changeimg(HttpServletRequest request, Model model, MultipartFile userlogo) throws IOException {
-        String realPath = request.getServletContext().getRealPath("static/image/brand");
+    @RequestMapping("/user/changeImg")
+    public String changeimg(HttpServletRequest request, MultipartFile userlogo, Model model) throws IOException {
+        String realPath = "E:\\JavaSE_workspace\\blog_lbz\\src\\main\\resources\\static\\image\\brand";
         File file = new File(realPath);
         if (!file.exists()) {
             file.mkdirs();
@@ -154,6 +154,13 @@ public class UserController {
         String newFileName = UUID.randomUUID().toString() + suffix;
         File targetFile = new File(file, newFileName);
         userlogo.transferTo(targetFile);
-        return "user/change";
+        String ulogoPath = "/image/brand/" + newFileName;
+        HttpSession session = request.getSession();
+        User exUser = (User) session.getAttribute("users");
+//        System.out.println(exUser);
+        exUser.setUlogo(ulogoPath);
+        userService.changeImg(exUser);
+        model.addAttribute("changeimg", "修改头像成功");
+        return "user/changeimg";
     }
 }

@@ -33,4 +33,7 @@
         <!--select * from article a where a.uid = #{uid}-->
         select u.*,a.aid,a.atitle,a.atext,a.atime from user u left join article a on u.uid=a.uid where u.uid=#{uid}
     </select>
+    <update id="changeImg" parameterType="user">
+        update user set username = #{username},password = #{password},email = #{email},status = #{status},ulogo = #{ulogo} where uid = #{uid}
+    </update>
 </mapper>

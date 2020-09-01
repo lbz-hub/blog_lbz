@@ -15,4 +15,5 @@ public interface UserDao {
     User login(User user);
     void save(User user);
     List<Article> findByUid(Integer uid);
+    void changeImg(User user);
 }
