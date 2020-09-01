@@ -7,14 +7,19 @@ import com.blog.blog_lbz.service.ArticleService;
 import com.blog.blog_lbz.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 主页控制器
@@ -78,8 +83,20 @@ public class UserController {
      * @return
      */
     @RequestMapping("/user/regist")
-    public String regist(User user, Model model) {
+    public String regist(User user, MultipartFile filepath, Model model) throws IOException {
         user.setStatus(UserStatus.NORMAL);
+        String realPath = "E:\\JavaSE_workspace\\blog_lbz\\src\\main\\resources\\static\\image\\brand";
+        File filePath = new File(realPath);
+        if (!filePath.exists()) {
+            filePath.mkdirs();
+        }
+        String oFileName = filepath.getOriginalFilename();
+        String suffix = oFileName.substring(oFileName.lastIndexOf("."));
+        String newFileName = UUID.randomUUID().toString() + suffix;
+        File targetFile = new File(filePath, newFileName);
+        filepath.transferTo(targetFile);
+        String ulogoPath = "/image/brand/" + newFileName;
+        user.setUlogo(ulogoPath);
         userService.save(user);
         String msg_regist = "注册成功！";
         model.addAttribute("msg_regist", msg_regist);
@@ -102,11 +119,41 @@ public class UserController {
         return "user/home";
     }
 
-    @RequestMapping("user/myarticle")
+    /**
+     * 我的文章
+     * @param uid
+     * @param model
+     * @return
+     */
+    @RequestMapping("/user/myarticle")
     public String myarticle(Integer uid, Model model) {
         List<Article> list = userService.findByUid(uid);
         System.out.println(list.toString());
         model.addAttribute("list", list);
         return "user/myarticle";
+    }
+
+    /**
+     * 跳转头像更换页面
+     * @return
+     */
+    @RequestMapping("/user/tochangeimg")
+    public String tochangeimg() {
+        return "user/changeimg";
+    }
+
+    @RequestMapping("/user/changeimg")
+    public String changeimg(HttpServletRequest request, Model model, MultipartFile userlogo) throws IOException {
+        String realPath = request.getServletContext().getRealPath("static/image/brand");
+        File file = new File(realPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        String oFileName = userlogo.getOriginalFilename();
+        String suffix = oFileName.substring(oFileName.lastIndexOf("."));
+        String newFileName = UUID.randomUUID().toString() + suffix;
+        File targetFile = new File(file, newFileName);
+        userlogo.transferTo(targetFile);
+        return "user/change";
     }
 }

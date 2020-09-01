@@ -17,6 +17,7 @@
             <result property="password" column="password"/>
             <result property="email" column="email"/>
             <result property="status" column="status"/>
+            <result property="ulogo" column="ulogo"/>
         </association>
     </resultMap>
     <insert id="add" parameterType="article">

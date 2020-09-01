@@ -10,6 +10,7 @@
         <result property="password" column="password"/>
         <result property="email" column="email"/>
         <result property="status" column="status"/>
+        <result property="ulogo" column="ulogo"/>
 
         <collection property="alist" ofType="com.blog.blog_lbz.entity.Article.Article">
             <id property="aid" column="aid"/>
@@ -25,7 +26,7 @@
     </select>
 
     <insert id="save" parameterType="user">
-        insert into user(username, password, email, status) values (#{username}, #{password}, #{email}, #{status})
+        insert into user(username, password, email, status, ulogo) values (#{username}, #{password}, #{email}, #{status}, #{ulogo})
     </insert>
 
     <select id="findByUid" parameterType="int" resultMap="articleMapper">

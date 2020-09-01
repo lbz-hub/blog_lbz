@@ -81,16 +81,20 @@
                     <div class="p">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
+                                <!-- 上一页 -->
                                 <li class="page-item" th:unless="${pageInfo_all.isFirstPage}">
                                     <a class="page-link" th:href="@{'/tohome?page='+${pageInfo_all.prePage}}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
-                                <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_all.pages)}" th:if="${x} lt '5'">
-                                    <a class="page-link" th:href="@{'/tohome?page='+${x}}">
-                                        <span th:text="${x}"></span>
-                                    </a>
+
+                                <!-- 中间页 -->
+                                <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_all.getTotal())}" th:if="${x} lt '5'">
+                                    <a class="page-link" th:href="@{'/tohome?page='+${x}}" th:text="${x}" th:if="${x ne pageInfo_all.getPageNum()}"></a>
+                                    <a class="page-link" th:href="@{'/tohome?page='+${x}}" th:text="${x}" th:if="${x eq pageInfo_all.getPageNum()}" th:style="'font-weight:hold;background:#6faed9;'"></a>
                                 </li>
+
+                                <!-- 下一页 -->
                                 <li class="page-item" th:unless="${pageInfo_all.isLastPage}">
                                     <a class="page-link" th:href="@{'/tohome?page='+${pageInfo_all.nextPage}}" aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
@@ -123,7 +127,7 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">后台管理</a>
                                         <a class="dropdown-item" th:href="@{'/user/myarticle?uid='+${session.users.uid}}">我的文章</a>
-                                        <a class="dropdown-item" href="#">待定</a>
+                                        <a class="dropdown-item" href="/user/tochangeimg">更换头像</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#">待定k</a>
                                     </div>
@@ -131,7 +135,7 @@
                             </div>
                             <div class="col-md-12" style="height: 15px;"></div>
                             <div class="col-md-12 img">
-                                <img src="../image/brand/bootstrap-solid.svg" class="img">
+                                <img th:src="@{${session.users.ulogo}}" class="img">
                             </div>
                             <div class="col-md-12" style="height: 20px;"></div>
                             <div class="col-md-12 b">
