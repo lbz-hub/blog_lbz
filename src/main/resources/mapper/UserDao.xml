@@ -17,6 +17,7 @@
             <result property="atitle" column="atitle"/>
             <result property="atext" column="atext"/>
             <result property="atime" column="atime"/>
+            <result property="cid" column="cid"/>
 <!--            <result property="status" column="status"/>-->
         </collection>
     </resultMap>

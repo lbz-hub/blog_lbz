@@ -142,6 +142,14 @@ public class UserController {
         return "user/changeimg";
     }
 
+    /**
+     * 修改头像
+     * @param request
+     * @param userlogo
+     * @param model
+     * @return
+     * @throws IOException
+     */
     @RequestMapping("/user/changeImg")
     public String changeimg(HttpServletRequest request, MultipartFile userlogo, Model model) throws IOException {
         String realPath = "E:\\JavaSE_workspace\\blog_lbz\\src\\main\\resources\\static\\image\\brand";

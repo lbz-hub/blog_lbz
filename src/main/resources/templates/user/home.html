@@ -54,6 +54,15 @@
                                 <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">Disabled</a>
                             </li>
                         </ul>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                文章分类
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                            </div>
+                        </div>
                         <form class="form-inline mt-2 mt-md-0" action="/article/search" method="post">
                             <input class="form-control mr-sm-2" type="text" name="search" id="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
@@ -70,6 +79,7 @@
                                 Article
                             </div>
                             <div class="card-body">
+                                <h4 class="card-title"style="color: #34ce57;" ><span th:text="${al.cname}"></span></h4>
                                 <h5 class="card-title"><span th:text="${al.atitle}"></span></h5>
                                 <p class="card-text"><span th:text="${al.atext}"></span></p>
                                 <a href="" class="btn btn-primary">查看</a>
@@ -89,7 +99,7 @@
                                 </li>
 
                                 <!-- 中间页 -->
-                                <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_all.getTotal())}" th:if="${x} lt '5'">
+                                <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_all.getPages())}">
                                     <a class="page-link" th:href="@{'/tohome?page='+${x}}" th:text="${x}" th:if="${x ne pageInfo_all.getPageNum()}"></a>
                                     <a class="page-link" th:href="@{'/tohome?page='+${x}}" th:text="${x}" th:if="${x eq pageInfo_all.getPageNum()}" th:style="'font-weight:hold;background:#6faed9;'"></a>
                                 </li>
