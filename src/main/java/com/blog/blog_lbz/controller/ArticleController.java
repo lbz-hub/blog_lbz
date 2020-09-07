@@ -97,4 +97,18 @@ public class ArticleController {
         model.addAttribute("clist_all", clist);
         return "article/edit";
     }
+
+    /**
+     * 分类查询
+     * @param cname
+     * @param page
+     * @param model
+     * @return
+     */
+    @RequestMapping("/article/classify")
+    public String classifycheck(String cname, Integer page, Model model) {
+        PageInfo<Article> pageInfo = articleService.classifycheck(cname, page, 3);
+        model.addAttribute("article_classify", pageInfo);
+        return "article/classify";
+    }
 }

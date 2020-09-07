@@ -17,4 +17,5 @@ public interface ArticleService {
     PageInfo<Article> search(String search, Integer page, Integer pageSize);
     Article checkByAid(Integer aid);
     Article look(String atitle);
+    PageInfo<Article> classifycheck(String cname, Integer page, Integer pageSize);
 }

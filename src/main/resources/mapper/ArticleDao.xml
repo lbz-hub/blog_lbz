@@ -42,4 +42,7 @@
     <update id="edit" parameterType="article">
         update article set atitle = #{atitle}, atext = #{atext}, atime = #{atime}, status= #{status}, cname = #{cname}, username = #{username} where aid = #{aid}
     </update>
+    <select id="classifycheck" parameterType="String" resultType="article">
+        select * from article where cname = #{cname}
+    </select>
 </mapper>

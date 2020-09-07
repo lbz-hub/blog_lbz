@@ -72,7 +72,7 @@
 <!--                    <div class="col-auto my-1">-->
                     <div class="form-group">
 <!--                        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">文章分类</label>-->
-                        <label for="cname">文章分类</label>
+                        <label for="cname">文章分类</label><br>
                         <select class="custom-select col-3" id="cname" name="cname">
                             <option th:each="c:${clist_all}" th:value="${c.cname}"><span th:text="${c.cname}"></span></option>
                         </select>

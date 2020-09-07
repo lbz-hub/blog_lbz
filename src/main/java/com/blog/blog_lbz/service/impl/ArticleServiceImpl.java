@@ -77,4 +77,12 @@ public class ArticleServiceImpl implements ArticleService {
     public Article look(String atitle) {
         return articleDao.look(atitle);
     }
+
+    @Override
+    public PageInfo<Article> classifycheck(String cname, Integer page, Integer pageSize) {
+        PageHelper.startPage(page, pageSize);
+        List<Article> list = articleDao.classifycheck(cname);
+        PageInfo<Article> pageInfo = new PageInfo<>(list);
+        return pageInfo;
+    }
 }

@@ -55,11 +55,12 @@
                             </li>
                         </ul>
                         <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-secondary dropdown-toggle" role="buttton" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 文章分类
                             </a>
+
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="" th:each="c:${clist_all}"><span th:text="${c.cname}"></span></a>
+                                <a class="dropdown-item" th:href="@{'/article/classify?page='+1+'&cname='+${c.cname}}" th:each="c:${clist_all}"><span th:text="${c.cname}"></span></a>
                             </div>
                         </div>
                         <div class="" style="width: 30px;"></div>
@@ -100,7 +101,7 @@
                                 </li>
 
                                 <!-- 中间页 -->
-                                <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_all.getPages())}">
+                                <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_all.getPages())}" th:if="${x} lt '5'">
                                     <a class="page-link" th:href="@{'/tohome?page='+${x}}" th:text="${x}" th:if="${x ne pageInfo_all.getPageNum()}"></a>
                                     <a class="page-link" th:href="@{'/tohome?page='+${x}}" th:text="${x}" th:if="${x eq pageInfo_all.getPageNum()}" th:style="'font-weight:hold;background:#6faed9;'"></a>
                                 </li>

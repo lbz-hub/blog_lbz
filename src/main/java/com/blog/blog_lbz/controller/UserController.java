@@ -43,11 +43,16 @@ public class UserController {
      * @return
      */
     @RequestMapping("/tohome")
-    public String index(Model model, Integer page) {
+    public String index(Model model, Integer page, HttpServletRequest request) {
         List<Classify> clist = classifyService.all();
         PageInfo<Article> pageInfo = articleService.all(page, 3);
         model.addAttribute("pageInfo_all", pageInfo);
         model.addAttribute("clist_all", clist);
+        HttpSession session = request.getSession();
+        User users = (User) session.getAttribute("users");
+        if (users != null) {
+            return "user/home";
+        }
         return "user/home_user";
     }
 

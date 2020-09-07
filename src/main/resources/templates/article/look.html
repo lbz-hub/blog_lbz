@@ -91,49 +91,22 @@
 
         </div>
 
-<!--        <div class="col-md-4 us">-->
-<!--            <div class="row u" th:if="${session.users} == null">-->
-<!--                <div class="col-md-12" style="height: 20px;"></div>-->
-<!--                <div class="col-md-12 img">-->
-<!--                    <img src="../image/brand/bootstrap-solid.svg" class="img">-->
-<!--                </div>-->
-<!--                <div class="col-md-12" style="height: 20px;"></div>-->
-<!--                <div class="col-md-12 b">-->
-<!--                    <a href="/user/tologin"><button class="btn btn-info" style="width: 49%">登录</button></a>-->
-<!--                    <a href="/user/toRegist"><button class="btn btn-warning" style="width: 49%">注册</button></a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="row u" th:if="${session.users} != null">-->
-<!--                <div class="col-md-12" style="height: 15px;"></div>-->
-<!--                <div class="col-md-12">-->
-<!--                    <div class="btn-group dropleft">-->
-<!--                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                            <i class="fa fa-bars" aria-hidden="true"></i>-->
-<!--                        </button>-->
-<!--                        <div class="dropdown-menu">-->
-<!--                            <a class="dropdown-item" href="#">后台管理</a>-->
-<!--                            <a class="dropdown-item" th:href="@{'/user/myarticle?uid='+${session.users.uid}}">我的文章</a>-->
-<!--                            <a class="dropdown-item" href="/user/tochangeimg">更换头像</a>-->
-<!--                            <div class="dropdown-divider"></div>-->
-<!--                            <a class="dropdown-item" href="#">待定k</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-12" style="height: 15px;"></div>-->
-<!--                <div class="col-md-12 img">-->
-<!--                    <img th:src="@{${session.users.ulogo}}" class="img">-->
-<!--                </div>-->
-<!--                <div class="col-md-12" style="height: 20px;"></div>-->
-<!--                <div class="col-md-12 b">-->
-<!--                    <h5 class="hn">你好！ <b th:text="${session.users.username}"></b></h5>-->
-<!--                </div>-->
-<!--                <div class="col-md-12">-->
-<!--                    <a href="/article/toadd" class="btn btn-success" style="width: 49%">添加文章</a>-->
-<!--                    <a href="/user/logout" class="btn btn-danger" style="width: 49%">登&nbsp;&nbsp;出</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="col-md-12" style="height:20px;"></div>-->
-<!--        </div>-->
+        <div class="col-md-4 us">
+            <div class="row u">
+                <div class="col-md-12" style="height: 20px;"></div>
+                <div class="col-md-12 img">
+                    <img src="../image/brand/bootstrap-solid.svg" class="img">
+                </div>
+                <div class="col-md-12" style="height: 20px;"></div>
+                <div class="col-md-12 b">
+                    <h5 class="hn">你好！ <b th:text="${session.users.username}"></b></h5>
+                </div>
+                <div class="col-md-12">
+                    <a href="/article/toadd" class="btn btn-success" style="width: 49%">添加文章</a>
+                    <a href="/user/logout" class="btn btn-danger" style="width: 49%">登&nbsp;&nbsp;出</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
