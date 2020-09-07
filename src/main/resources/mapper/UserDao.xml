@@ -23,7 +23,7 @@
     </resultMap>
 
     <select id="login" parameterType="user" resultType="user">
-        select * from user where username = #{username} and password = #{password}
+        select * from user where username = #{username}
     </select>
 
     <insert id="save" parameterType="user">

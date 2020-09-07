@@ -10,6 +10,8 @@
         <result property="atext" column="atext"/>
         <result property="atime" column="atime"/>
         <result property="status" column="status"/>
+        <result property="username" column="username"/>
+        <result property="cname" column="cname"/>
 
         <association property="user" column="uid" javaType="com.blog.blog_lbz.entity.User.User">
             <id property="uid" column="uid"/>
@@ -21,7 +23,7 @@
         </association>
     </resultMap>
     <insert id="add" parameterType="article">
-        insert into article(atitle, atext, atime, uid) values (#{atitle}, #{atext}, #{atime}, #{uid})
+        insert into article(atitle, atext, atime, status, cname) values (#{atitle}, #{atext}, #{atime}, #{status}, #{cname}
     </insert>
     <select id="all" resultType="article">
         select * from article
@@ -34,4 +36,10 @@
             </if>
         </where>
     </select>
+    <select id="look" parameterType="String" resultType="article">
+        select * from article where atitle = #{atitle}
+    </select>
+    <update id="edit" parameterType="article">
+        update article set atitle = #{atitle}, atext = #{atext}, atime = #{atime}, status= #{status}, cname = #{cname}, username = #{username} where aid = #{aid}
+    </update>
 </mapper>

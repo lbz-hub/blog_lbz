@@ -17,4 +17,5 @@ public interface ArticleDao {
     List<Article> all();
     List<Article> search(String search);
     Article checkByAid(Integer aid);
+    Article look(String atitle);
 }

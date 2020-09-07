@@ -1,10 +1,13 @@
 package com.blog.blog_lbz.controller;
 
 import com.blog.blog_lbz.entity.Article.Article;
+import com.blog.blog_lbz.entity.Classify.Classify;
 import com.blog.blog_lbz.entity.User.User;
 import com.blog.blog_lbz.entity.User.UserStatus;
 import com.blog.blog_lbz.service.ArticleService;
+import com.blog.blog_lbz.service.ClassifyService;
 import com.blog.blog_lbz.service.UserService;
+import com.blog.blog_lbz.utils.MD5Utils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -30,17 +33,22 @@ public class UserController {
     private UserService userService;
     @Autowired
     private ArticleService articleService;
-    @RequestMapping("/hello")
-    public String index(Model model) {
+    @Autowired
+    private ClassifyService classifyService;
 
-        return "index";
-    }
-
+    /**
+     * 主页面
+     * @param model
+     * @param page
+     * @return
+     */
     @RequestMapping("/tohome")
-    public String tohome(Model model) {
-        PageInfo<Article> pageInfo = articleService.all(1, 3);
+    public String index(Model model, Integer page) {
+        List<Classify> clist = classifyService.all();
+        PageInfo<Article> pageInfo = articleService.all(page, 3);
         model.addAttribute("pageInfo_all", pageInfo);
-        return "user/home";
+        model.addAttribute("clist_all", clist);
+        return "user/home_user";
     }
 
     @RequestMapping("/user/tologin")
@@ -59,16 +67,24 @@ public class UserController {
     public String login(User user, Model model, HttpSession session) {
         User users = userService.login(user);
         if (users == null) {
-            String msg_error = "用户名或密码错误";
+            String msg_error = "用户不存在";
             model.addAttribute("msg_error", msg_error);
             return "user/regist";
         }
-        String msg_success = "登录成功！";
-        model.addAttribute("msg_success", msg_success);
-        session.setAttribute("users", users);
-        PageInfo<Article> pageInfo = articleService.all(1, 3);
-        model.addAttribute("pageInfo_all", pageInfo);
-        return "user/home";
+
+        if (MD5Utils.getSaltverifyMD5(user.getPassword(), users.getPassword())) {
+            String msg_success = "登录成功！";
+            model.addAttribute("msg_success", msg_success);
+            session.setAttribute("users", users);
+            PageInfo<Article> pageInfo = articleService.all(1, 3);
+            List<Classify> clist = classifyService.all();
+            model.addAttribute("pageInfo_all", pageInfo);
+            model.addAttribute("clist_all", clist);
+            return "user/home";
+        }
+        System.out.println("====" + MD5Utils.getSaltverifyMD5(user.getPassword(), users.getPassword()));
+        model.addAttribute("msg_error_login", "用户名或密码错误");
+        return "user/login";
     }
 
     @RequestMapping("/user/toRegist")
@@ -97,6 +113,8 @@ public class UserController {
         filepath.transferTo(targetFile);
         String ulogoPath = "/image/brand/" + newFileName;
         user.setUlogo(ulogoPath);
+        String pass = MD5Utils.hash(user.getPassword());
+        user.setPassword(pass);
         userService.save(user);
         String msg_regist = "注册成功！";
         model.addAttribute("msg_regist", msg_regist);

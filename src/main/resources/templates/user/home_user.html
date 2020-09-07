@@ -25,6 +25,9 @@
         .hn {
             text-align: center;
         }
+        .p {
+
+        }
     </style>
     <script type="text/javascript"  th:inline="javascript">
         // function myFunction(){
@@ -55,9 +58,10 @@
                             </li>
                         </ul>
                         <div class="dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 文章分类
                             </a>
+
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" href="" th:each="c:${clist_all}"><span th:text="${c.cname}"></span></a>
                             </div>
@@ -72,8 +76,7 @@
             </div>
 
                 <div class="col-md-12" style="height: 100px;"></div>
-                <div class="col-md-7">
-
+                <div class="col-md-12">
                         <div class="card" th:each="al:${pageInfo_all.list}">
                             <div class="card-header">
                                 Article
@@ -82,8 +85,7 @@
                                 <h4 class="card-title"style="color: #34ce57;" ><span th:text="${al.cname}"></span></h4>
                                 <h5 class="card-title"><span th:text="${al.atitle}"></span></h5>
                                 <p class="card-text"><span th:text="${al.atext}"></span></p>
-                                <a th:href="@{'/article/looka?atitle='+${al.atitle}}" class="btn btn-primary">查看</a>
-                                <a th:href="@{'/article/toedit?atitle='+${al.atitle}}" class="btn btn-primary">修改文章</a>
+                                <a th:href="@{'/article/looka?aid='+${al.aid}}" class="btn btn-primary">查看</a>
                             </div>
                             <div class="" style="height: 50px;"></div>
                         </div>
@@ -114,48 +116,6 @@
                             </ul>
                         </nav>
                     </div>
-                </div>
-
-                <div class="col-md-4 us">
-                        <div class="row u" th:if="${session.users} == null">
-                            <div class="col-md-12" style="height: 20px;"></div>
-                            <div class="col-md-12 img">
-                                <img src="../image/brand/bootstrap-solid.svg" class="img">
-                            </div>
-                            <div class="col-md-12" style="height: 20px;"></div>
-                            <div class="col-md-12 b">
-                                <a href="/user/tologin"><button class="btn btn-info" style="width: 49%">登录</button></a>
-                                <a href="/user/toRegist"><button class="btn btn-warning" style="width: 49%">注册</button></a>
-                            </div>
-                        </div>
-                        <div class="row u" th:if="${session.users} != null">
-                            <div class="col-md-12" style="height: 15px;"></div>
-                            <div class="col-md-12">
-                                <div class="btn-group dropleft">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-bars" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" style="pointer-events: none;">功能管理</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" th:href="@{'/user/myarticle?uid='+${session.users.uid}}">我的文章</a>
-                                        <a class="dropdown-item" href="/user/tochangeimg">更换头像</a>
-                                        <a class="dropdown-item" href="/article/toadd">添加文章</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12" style="height: 15px;"></div>
-                            <div class="col-md-12 img">
-                                <img th:src="@{${session.users.ulogo}}" class="img">
-                            </div>
-                            <div class="col-md-12" style="height: 20px;"></div>
-                            <div class="col-md-12 b">
-                                <h5 class="hn">你好！ <b th:text="${session.users.username}"></b></h5>
-                            </div>
-                            <div class="col-md-12">
-                                <a href="/user/logout" class="btn btn-danger" style="width: 100%">登&nbsp;&nbsp;出</a>
-                            </div>
-                        </div>
                 </div>
         </div>
     </div>

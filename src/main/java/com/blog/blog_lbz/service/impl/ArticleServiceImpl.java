@@ -1,6 +1,7 @@
 package com.blog.blog_lbz.service.impl;
 
 import com.blog.blog_lbz.dao.ArticleDao;
+import com.blog.blog_lbz.dao.ClassifyDao;
 import com.blog.blog_lbz.entity.Article.Article;
 import com.blog.blog_lbz.service.ArticleService;
 import com.github.pagehelper.PageHelper;
@@ -27,6 +28,7 @@ public class ArticleServiceImpl implements ArticleService {
     public void add(Article article) {
         Date atime = new Date();
         article.setAtime(atime);
+        article.setStatus("1");
         articleDao.add(article);
     }
 
@@ -37,6 +39,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void edit(Article article) {
+        article.setStatus("1");
+        Date atime = new Date();
+        article.setAtime(atime);
         articleDao.edit(article);
     }
 
@@ -66,5 +71,10 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> list = articleDao.search(search);
         PageInfo<Article> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @Override
+    public Article look(String atitle) {
+        return articleDao.look(atitle);
     }
 }
