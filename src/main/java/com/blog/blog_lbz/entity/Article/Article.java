@@ -14,7 +14,8 @@ public class Article implements Serializable {
     private Integer aid;
     private String atitle;
     private String atext;
-    private Date atime;
+    //private Date atime;
+    private String atime;
     private String status;
     private String cname;
     private String username;

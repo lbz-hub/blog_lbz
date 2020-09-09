@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public void add(Article article) {
         Date atime = new Date();
-        article.setAtime(atime);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM-dd");
+        String str = sdf.format(atime);
+        article.setAtime(str);
         article.setStatus("1");
         articleDao.add(article);
     }
@@ -41,7 +44,9 @@ public class ArticleServiceImpl implements ArticleService {
     public void edit(Article article) {
         article.setStatus("1");
         Date atime = new Date();
-        article.setAtime(atime);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String str = sdf.format(atime);
+        article.setAtime(str);
         articleDao.edit(article);
     }
 

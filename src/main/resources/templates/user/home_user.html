@@ -28,6 +28,7 @@
         .p {
 
         }
+        .card-text {overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;}
     </style>
     <script type="text/javascript"  th:inline="javascript">
         // function myFunction(){
@@ -67,7 +68,7 @@
                             </div>
                         </div>
                         <div class="" style="width: 30px;"></div>
-                        <form class="form-inline mt-2 mt-md-0" action="/article/search" method="post">
+                        <form class="form-inline mt-2 mt-md-0" th:action="@{'/article/search?page=' + 1}" method="post">
                             <input class="form-control mr-sm-2" type="text" name="search" id="search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
                         </form>

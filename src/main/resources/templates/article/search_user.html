@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome/css/font-awesome.min.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <title>搜索结果</title>
+    <style>
+        * { margin: 0;padding: 0; }
+        .img {
+            height: 250px;
+            width: 280px;
+        }
+        .us {
+            border: 1px solid #000000;
+        }
+        .img {
+            width: 100%;
+            height: 150px;
+        }
+        .hn {
+            text-align: center;
+        }
+        .card-text {overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                    <a class="navbar-brand" href="/tohome">个人博客</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/tohome">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline mt-2 mt-md-0" action="/article/search" method="post">
+                            <input class="form-control mr-sm-2" type="text" name="search" id="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="col-md-12" style="height: 100px;"></div>
+            <div class="col-md-12">
+                <div class="card" th:each="al:${pageInfo_search.list}">
+                    <div class="card-header">
+                        Article
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><span th:text="${al.atitle}"></span></h5>
+                        <p class="card-text"><span th:text="${al.atext}"></span></p>
+                        <a href="" class="btn btn-primary">查看</a>
+                    </div>
+                    <div class="" style="height: 50px;"></div>
+                </div>
+                <div class="" style="height: 10px;"></div>
+                <div class="p">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <!-- 上一页 -->
+                            <li class="page-item" th:unless="${pageInfo_search.isFirstPage}">
+                                <a class="page-link" th:href="@{'/article/search?page='+${pageInfo_search.prePage}}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+                            <!-- 中间页 -->
+                            <li class="page-item" th:each="x:${#numbers.sequence(1,pageInfo_search.getPages())}">
+                                <a class="page-link" th:href="@{'/article/search?page='+${x}}" th:text="${x}" th:if="${x ne pageInfo_search.getPageNum()}"></a>
+                                <a class="page-link" th:href="@{'/article/search?page='+${x}}" th:text="${x}" th:if="${x eq pageInfo_search.getPageNum()}" th:style="'font-weight:hold;background:#6faed9;'"></a>
+                            </li>
+
+                            <!-- 下一页 -->
+                            <li class="page-item" th:unless="${pageInfo_search.isLastPage}">
+                                <a class="page-link" th:href="@{'/article/search?page='+${pageInfo_search.nextPage}}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
